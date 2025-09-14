@@ -12,24 +12,15 @@ function MainApp() {
   return (
     <div className="main-app">
       {/* Header */}
-      <header className="app-header">
+            <header className="app-header">
         <div className="header-content">
-          <h1>🧠 StudyBuddy</h1>
-          <p>AI-Powered Study Session Manager for Vietnamese Students</p>
-        </div>
-        <div className="header-stats">
-          <div className="stat">
-            <span className="stat-number">{sessions.filter(s => s.status === 'COMPLETED').length}</span>
-            <span className="stat-label">Sessions</span>
+          <div className="logo">
+            <div className="logo-icon">🧠</div>
+            <div className="logo-text">
+              <h1>StudyBuddy</h1>
+              <span>AI Study Session Manager</span>
+            </div>
           </div>
-          <div className="stat">
-            <span className="stat-number">
-              {Math.round(sessions.reduce((sum, s) => sum + (s.focusScore || 0), 0) / sessions.length * 10) / 10 || 0}
-            </span>
-            <span className="stat-label">Avg Focus</span>
-          </div>
-        </div>
-      </header>
 
       {/* Navigation */}
       <nav className="main-nav">

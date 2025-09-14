@@ -77,12 +77,10 @@ function Analytics() {
 
   return (
     <div className="analytics">
-      <div className="analytics-header">
-        <h2>📊 Study Analytics</h2>
-        <p>Insights into your learning patterns and performance</p>
-      </div>
-
-      {/* Key Metrics */}
+        <div className="analytics-header">
+          <h2>📊 Analytics Dashboard</h2>
+          <p>Track your study performance and AI insights with StudyBuddy</p>
+        </div>      {/* Key Metrics */}
       <div className="metrics-grid">
         <div className="metric-card">
           <div className="metric-icon">
