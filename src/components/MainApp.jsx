@@ -12,7 +12,7 @@ function MainApp() {
   return (
     <div className="main-app">
       {/* Header */}
-            <header className="app-header">
+      <header className="app-header">
         <div className="header-content">
           <div className="logo">
             <div className="logo-icon">🧠</div>
@@ -21,6 +21,8 @@ function MainApp() {
               <span>AI Study Session Manager</span>
             </div>
           </div>
+        </div>
+      </header>
 
       {/* Navigation */}
       <nav className="main-nav">
