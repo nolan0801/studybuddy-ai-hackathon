@@ -1,8 +1,11 @@
 {
-  "name": "studysync-app",
+  "name": "studybuddy-ai-hackathon",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
+  "description": "StudyBuddy - AI-powered study session manager with smart focus timer for Vietnamese university students",
+  "keywords": ["studybuddy", "ai", "study-session", "focus-timer", "pomodoro", "vietnamese-students", "naver-hackathon"],
+  "author": "NAVER AI Hackathon Participant",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
