@@ -4,7 +4,7 @@ import { Calendar, Clock, Plus, Edit2, Trash2, Play, ChevronLeft, ChevronRight }
 
 function SessionPlannerMonth() {
   const { sessions, dispatch, ACTIONS, SESSION_STATUS, SUBJECTS } = useStudy();
-  const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split('T')[0]);
+  const [selectedDate, setSelectedDate] = useState(new Date().toLocaleDateString('en-CA'));
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [showModal, setShowModal] = useState(false);
   const [editingSession, setEditingSession] = useState(null);
@@ -12,12 +12,12 @@ function SessionPlannerMonth() {
     subject: '',
     topic: '',
     plannedDuration: 25,
-    scheduledFor: new Date().toISOString().split('T')[0],
+    scheduledFor: new Date().toLocaleDateString('en-CA'),
     scheduledTime: '09:00'
   });
 
   const todaySessions = sessions.filter(session => {
-    const sessionDate = new Date(session.scheduledFor).toISOString().split('T')[0];
+    const sessionDate = new Date(session.scheduledFor).toLocaleDateString('en-CA'); // YYYY-MM-DD format
     return sessionDate === selectedDate;
   });
 
@@ -72,7 +72,7 @@ function SessionPlannerMonth() {
       subject: session.subject,
       topic: session.topic,
       plannedDuration: session.plannedDuration,
-      scheduledFor: scheduledDate.toISOString().split('T')[0],
+      scheduledFor: scheduledDate.toLocaleDateString('en-CA'),
       scheduledTime: scheduledDate.toTimeString().slice(0, 5)
     });
     setEditingSession(session);
@@ -179,12 +179,13 @@ function SessionPlannerMonth() {
         {/* Calendar grid */}
         <div className="calendar-grid">
           {monthDays.map((day, index) => {
-            const dayString = day.toISOString().split('T')[0];
-            const daySessions = sessions.filter(s => 
-              new Date(s.scheduledFor).toISOString().split('T')[0] === dayString
-            );
+            const dayString = day.toLocaleDateString('en-CA'); // Use en-CA for YYYY-MM-DD format
+            const daySessions = sessions.filter(s => {
+              const sessionDate = new Date(s.scheduledFor).toLocaleDateString('en-CA');
+              return sessionDate === dayString;
+            });
             const isSelected = dayString === selectedDate;
-            const isToday = dayString === new Date().toISOString().split('T')[0];
+            const isToday = dayString === new Date().toLocaleDateString('en-CA');
             const isOtherMonth = !isCurrentMonth(day);
 
             return (
@@ -382,8 +383,10 @@ function SessionPlannerMonth() {
             </div>
           </div>
         </div>
+        
       )}
     </div>
+    
   );
 }
 

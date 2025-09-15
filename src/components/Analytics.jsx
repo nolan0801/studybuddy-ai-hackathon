@@ -3,7 +3,7 @@ import { useStudy } from '../context/StudyContext';
 import { BarChart3, TrendingUp, Clock, Target, Brain, Trophy } from 'lucide-react';
 
 function Analytics() {
-  const { sessions, aiInsights, focusRecords } = useStudy();
+  const { sessions, performanceAnalytics, focusRecords } = useStudy();
 
   const completedSessions = sessions.filter(s => s.status === 'COMPLETED');
   const totalSessions = sessions.length;
@@ -73,13 +73,13 @@ function Analytics() {
     return { level: 'Needs Work', emoji: '💪', color: '#ef4444' };
   };
 
-  const productivity = getProductivityLevel(aiInsights.averageFocusScore);
+  const productivity = getProductivityLevel(performanceAnalytics.averageFocusScore);
 
   return (
     <div className="analytics">
         <div className="analytics-header">
           <h2>📊 Analytics Dashboard</h2>
-          <p>Track your study performance and AI insights with StudyBuddy</p>
+          <p>Track your study performance and insights with StudyBuddy</p>
         </div>      {/* Key Metrics */}
       <div className="metrics-grid">
         <div className="metric-card">
@@ -113,7 +113,7 @@ function Analytics() {
             <Brain size={24} />
           </div>
           <div className="metric-content">
-            <h3>{aiInsights.averageFocusScore.toFixed(1)}/10</h3>
+            <h3>{performanceAnalytics.averageFocusScore.toFixed(1)}/10</h3>
             <p>Average Focus Score</p>
             <span 
               className="metric-change"
@@ -128,9 +128,9 @@ function Analytics() {
           <div className="metric-icon">
             <TrendingUp size={24} />
           </div>
-          <div className="metric-content">
-            <h3 style={{ color: aiInsights.productivityTrend === 'increasing' ? '#10b981' : '#f59e0b' }}>
-              {aiInsights.productivityTrend}
+                    <div className="metric-content">
+            <h3 style={{ color: performanceAnalytics.productivityTrend === 'increasing' ? '#10b981' : '#f59e0b' }}>
+              {performanceAnalytics.productivityTrend}
             </h3>
             <p>Productivity Trend</p>
             <span className="metric-change">
@@ -224,9 +224,9 @@ function Analytics() {
         </div>
       </div>
 
-      {/* AI Insights Panel */}
-      <div className="ai-insights-panel">
-        <h3>🤖 AI Insights & Recommendations</h3>
+      {/* Performance Analytics Panel */}
+      <div className="performance-analytics-panel">
+        <h3>📊 Performance Analytics & Recommendations</h3>
         
         <div className="insights-grid">
           <div className="insight-card">
@@ -235,7 +235,7 @@ function Analytics() {
               <h4>Optimal Study Times</h4>
             </div>
             <div className="time-recommendations">
-              {aiInsights.optimalStudyTimes.map((time, index) => (
+              {performanceAnalytics.optimalStudyTimes.map((time, index) => (
                 <span key={index} className="time-slot optimal">
                   {time}
                 </span>
@@ -250,7 +250,7 @@ function Analytics() {
               <h4>Break Recommendations</h4>
             </div>
             <div className="break-info">
-              <span className="break-time">{aiInsights.recommendedBreakTime} minutes</span>
+              <span className="break-time">{performanceAnalytics.recommendedBreakTime} minutes</span>
               <p>Recommended break duration between study sessions</p>
             </div>
           </div>
@@ -272,13 +272,13 @@ function Analytics() {
         <div className="smart-recommendations">
           <h4>💡 Smart Recommendations</h4>
           <div className="recommendation-list">
-            {aiInsights.averageFocusScore < 6 && (
+            {performanceAnalytics.averageFocusScore < 6 && (
               <div className="recommendation">
                 <span className="rec-emoji">🎯</span>
                 <p>Try shorter 20-minute sessions to improve focus</p>
               </div>
             )}
-            {aiInsights.productivityTrend === 'decreasing' && (
+            {performanceAnalytics.productivityTrend === 'decreasing' && (
               <div className="recommendation">
                 <span className="rec-emoji">⚡</span>
                 <p>Consider taking longer breaks or studying at different times</p>

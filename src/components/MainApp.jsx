@@ -60,27 +60,27 @@ function MainApp() {
         {activeView === 'analytics' && <Analytics />}
       </main>
 
-      {/* AI Insights Sidebar */}
-      <aside className="ai-sidebar">
-        <div className="ai-header">
+      {/* Performance Analytics Sidebar */}
+      <aside className="performance-analytics-sidebar">
+        <div className="analytics-header">
           <Brain size={20} />
-          <h3>AI Insights</h3>
+          <h3>Performance Analytics</h3>
         </div>
-        <AIInsightsSummary />
+        <PerformanceAnalyticsSummary />
       </aside>
     </div>
   );
 }
 
-function AIInsightsSummary() {
-  const { aiInsights } = useStudy();
+function PerformanceAnalyticsSummary() {
+  const { performanceAnalytics } = useStudy();
 
   return (
-    <div className="ai-insights">
+    <div className="performance-analytics">
       <div className="insight-card">
         <h4>🎯 Optimal Study Times</h4>
         <div className="time-slots">
-          {aiInsights.optimalStudyTimes.map((time, index) => (
+          {performanceAnalytics.optimalStudyTimes.map((time, index) => (
             <span key={index} className="time-slot">{time}</span>
           ))}
         </div>
@@ -90,12 +90,12 @@ function AIInsightsSummary() {
         <h4>📊 Your Focus Score</h4>
         <div className="focus-score">
           <div className="score-circle">
-            <span className="score-number">{aiInsights.averageFocusScore.toFixed(1)}</span>
+            <span className="score-number">{performanceAnalytics.averageFocusScore.toFixed(1)}</span>
             <span className="score-max">/10</span>
           </div>
           <p className="score-trend">
-            Trend: <span className={`trend ${aiInsights.productivityTrend}`}>
-              {aiInsights.productivityTrend}
+            Trend: <span className={`trend ${performanceAnalytics.productivityTrend}`}>
+              {performanceAnalytics.productivityTrend}
             </span>
           </p>
         </div>
@@ -106,11 +106,11 @@ function AIInsightsSummary() {
         <div className="recommendations">
           <div className="recommendation">
             <span className="rec-emoji">⏰</span>
-            <span>Take {aiInsights.recommendedBreakTime}min breaks</span>
+            <span>Take {performanceAnalytics.recommendedBreakTime}min breaks</span>
           </div>
           <div className="recommendation">
             <span className="rec-emoji">🔥</span>
-            <span>Your peak hours: {aiInsights.optimalStudyTimes[0] || '9:00'}</span>
+            <span>Your peak hours: {performanceAnalytics.optimalStudyTimes[0] || '9:00'}</span>
           </div>
         </div>
       </div>

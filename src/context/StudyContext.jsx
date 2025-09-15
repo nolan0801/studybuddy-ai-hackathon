@@ -28,7 +28,7 @@ const ACTIONS = {
   RESET_TIMER: 'RESET_TIMER',
   SET_ACTIVE_SESSION: 'SET_ACTIVE_SESSION',
   ADD_FOCUS_RECORD: 'ADD_FOCUS_RECORD',
-  UPDATE_AI_INSIGHTS: 'UPDATE_AI_INSIGHTS',
+  UPDATE_PERFORMANCE_ANALYTICS: 'UPDATE_PERFORMANCE_ANALYTICS',
   LOAD_SAVED_DATA: 'LOAD_SAVED_DATA'
 };
 
@@ -47,7 +47,44 @@ const initialState = {
       id: 1,
       subject: 'Toán học',
       topic: 'Giải tích 1 - Giới hạn hàm số',
-      plannedDuration: 25, // minutes
+      plannedDuration: 25,
+      actualDuration: 23,
+      focusScore: 8.2,
+      completedPomodoros: 1,
+      breaks: [{ startTime: '2024-09-15T10:25:00', duration: 5 }],
+      distractions: 1,
+      notes: 'Hiểu được khái niệm cơ bản về giới hạn',
+      status: SESSION_STATUS.COMPLETED,
+      startTime: '2024-09-15T10:00:00',
+      endTime: '2024-09-15T10:25:00',
+      createdAt: '2024-09-15T09:30:00',
+      scheduledFor: '2024-09-15T10:00:00'
+    },
+    {
+      id: 2,
+      subject: 'Tiếng Anh',
+      topic: 'IELTS Reading Practice - Passage Analysis',
+      plannedDuration: 50,
+      actualDuration: 45,
+      focusScore: 8.5,
+      completedPomodoros: 2,
+      breaks: [
+        { startTime: '2024-09-15T14:25:00', duration: 5 },
+        { startTime: '2024-09-15T15:15:00', duration: 10 }
+      ],
+      distractions: 2,
+      notes: 'Improved reading speed significantly. Need to work on vocabulary.',
+      status: SESSION_STATUS.COMPLETED,
+      startTime: '2024-09-15T14:00:00',
+      endTime: '2024-09-15T15:30:00',
+      createdAt: '2024-09-15T13:45:00',
+      scheduledFor: '2024-09-15T14:00:00'
+    },
+    {
+      id: 3,
+      subject: 'Lập trình',
+      topic: 'React Hooks và State Management',
+      plannedDuration: 60,
       actualDuration: 0,
       focusScore: 0,
       completedPomodoros: 0,
@@ -58,27 +95,129 @@ const initialState = {
       startTime: null,
       endTime: null,
       createdAt: new Date().toISOString(),
-      scheduledFor: new Date().toISOString()
+      scheduledFor: '2024-09-16T09:00:00'
     },
     {
-      id: 2,
-      subject: 'Tiếng Anh',
-      topic: 'IELTS Reading Practice',
+      id: 4,
+      subject: 'Vật lý',
+      topic: 'Cơ học - Định luật Newton',
+      plannedDuration: 40,
+      actualDuration: 35,
+      focusScore: 7.8,
+      completedPomodoros: 1,
+      breaks: [{ startTime: '2024-09-14T16:20:00', duration: 5 }],
+      distractions: 3,
+      notes: 'Cần ôn lại công thức tính lực',
+      status: SESSION_STATUS.COMPLETED,
+      startTime: '2024-09-14T16:00:00',
+      endTime: '2024-09-14T16:35:00',
+      createdAt: '2024-09-14T15:30:00',
+      scheduledFor: '2024-09-14T16:00:00'
+    },
+    {
+      id: 5,
+      subject: 'Kinh tế',
+      topic: 'Vi mô - Cung và Cầu',
+      plannedDuration: 30,
+      actualDuration: 0,
+      focusScore: 0,
+      completedPomodoros: 0,
+      breaks: [],
+      distractions: 0,
+      notes: '',
+      status: SESSION_STATUS.PLANNED,
+      startTime: null,
+      endTime: null,
+      createdAt: new Date().toISOString(),
+      scheduledFor: '2024-09-16T14:00:00'
+    },
+    {
+      id: 6,
+      subject: 'Văn học',
+      topic: 'Phân tích tác phẩm "Số đỏ"',
+      plannedDuration: 45,
+      actualDuration: 42,
+      focusScore: 9.1,
+      completedPomodoros: 2,
+      breaks: [{ startTime: '2024-09-13T20:25:00', duration: 5 }],
+      distractions: 0,
+      notes: 'Hiểu sâu về nhân vật Xuân Tóc Đỏ. Tác phẩm rất hay!',
+      status: SESSION_STATUS.COMPLETED,
+      startTime: '2024-09-13T20:00:00',
+      endTime: '2024-09-13T20:42:00',
+      createdAt: '2024-09-13T19:45:00',
+      scheduledFor: '2024-09-13T20:00:00'
+    },
+    {
+      id: 7,
+      subject: 'Hóa học',
+      topic: 'Hóa hữu cơ - Ankan và Anken',
+      plannedDuration: 35,
+      actualDuration: 0,
+      focusScore: 0,
+      completedPomodoros: 0,
+      breaks: [],
+      distractions: 0,
+      notes: '',
+      status: SESSION_STATUS.PLANNED,
+      startTime: null,
+      endTime: null,
+      createdAt: new Date().toISOString(),
+      scheduledFor: '2024-09-17T10:30:00'
+    },
+    {
+      id: 8,
+      subject: 'Sinh học',
+      topic: 'Di truyền học - Định luật Mendel',
       plannedDuration: 50,
-      actualDuration: 45,
-      focusScore: 8.5,
+      actualDuration: 48,
+      focusScore: 8.7,
       completedPomodoros: 2,
       breaks: [
-        { startTime: '2024-01-15T10:25:00', duration: 5 },
-        { startTime: '2024-01-15T11:15:00', duration: 10 }
+        { startTime: '2024-09-12T15:25:00', duration: 5 },
+        { startTime: '2024-09-12T16:10:00', duration: 5 }
       ],
-      distractions: 2,
-      notes: 'Improved reading speed significantly',
+      distractions: 1,
+      notes: 'Làm được nhiều bài tập. Cần ôn lại lai phân tích',
       status: SESSION_STATUS.COMPLETED,
-      startTime: '2024-01-15T10:00:00',
-      endTime: '2024-01-15T11:30:00',
-      createdAt: new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString(),
-      scheduledFor: new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString()
+      startTime: '2024-09-12T15:00:00',
+      endTime: '2024-09-12T15:48:00',
+      createdAt: '2024-09-12T14:30:00',
+      scheduledFor: '2024-09-12T15:00:00'
+    },
+    {
+      id: 9,
+      subject: 'Lịch sử',
+      topic: 'Cách mạng tháng 8 năm 1945',
+      plannedDuration: 40,
+      actualDuration: 0,
+      focusScore: 0,
+      completedPomodoros: 0,
+      breaks: [],
+      distractions: 0,
+      notes: '',
+      status: SESSION_STATUS.PLANNED,
+      startTime: null,
+      endTime: null,
+      createdAt: new Date().toISOString(),
+      scheduledFor: '2024-09-18T16:00:00'
+    },
+    {
+      id: 10,
+      subject: 'Tin học',
+      topic: 'Thuật toán sắp xếp - Quick Sort',
+      plannedDuration: 60,
+      actualDuration: 55,
+      focusScore: 9.0,
+      completedPomodoros: 2,
+      breaks: [{ startTime: '2024-09-11T21:25:00', duration: 5 }],
+      distractions: 0,
+      notes: 'Code implementation thành công. Hiểu rõ time complexity.',
+      status: SESSION_STATUS.COMPLETED,
+      startTime: '2024-09-11T21:00:00',
+      endTime: '2024-09-11T21:55:00',
+      createdAt: '2024-09-11T20:45:00',
+      scheduledFor: '2024-09-11T21:00:00'
     }
   ],
   activeSession: null,
@@ -93,12 +232,40 @@ const initialState = {
     {
       id: 1,
       sessionId: 2,
-      timestamp: '2024-01-15T10:15:00',
+      timestamp: '2024-09-15T14:15:00',
       focusLevel: 9,
       activity: 'reading'
+    },
+    {
+      id: 2,
+      sessionId: 4,
+      timestamp: '2024-09-14T16:10:00',
+      focusLevel: 7,
+      activity: 'problem_solving'
+    },
+    {
+      id: 3,
+      sessionId: 6,
+      timestamp: '2024-09-13T20:20:00',
+      focusLevel: 9,
+      activity: 'analysis'
+    },
+    {
+      id: 4,
+      sessionId: 8,
+      timestamp: '2024-09-12T15:30:00',
+      focusLevel: 8,
+      activity: 'memorization'
+    },
+    {
+      id: 5,
+      sessionId: 10,
+      timestamp: '2024-09-11T21:30:00',
+      focusLevel: 9,
+      activity: 'coding'
     }
   ],
-  aiInsights: {
+  performanceAnalytics: {
     optimalStudyTimes: ['09:00', '14:00', '20:00'],
     subjectDifficulty: {
       'Toán học': 8.5,
@@ -121,7 +288,7 @@ const initialState = {
   }
 };
 
-// AI Helper Functions
+// Performance Analytics Helper Functions
 const calculateFocusScore = (session) => {
   if (!session.actualDuration) return 0;
   
@@ -133,11 +300,11 @@ const calculateFocusScore = (session) => {
   return Math.min(10, Math.max(0, score));
 };
 
-const generateAIInsights = (sessions) => {
+const generatePerformanceAnalytics = (sessions) => {
   const completedSessions = sessions.filter(s => s.status === SESSION_STATUS.COMPLETED);
   
   if (completedSessions.length === 0) {
-    return initialState.aiInsights;
+    return initialState.performanceAnalytics;
   }
 
   // Calculate optimal study times based on completed sessions
@@ -195,7 +362,7 @@ function studyReducer(state, action) {
       return {
         ...state,
         sessions: newSessions,
-        aiInsights: generateAIInsights(newSessions)
+        performanceAnalytics: generatePerformanceAnalytics(newSessions)
       };
 
     case ACTIONS.UPDATE_SESSION:
@@ -207,7 +374,7 @@ function studyReducer(state, action) {
       return {
         ...state,
         sessions: updatedSessions,
-        aiInsights: generateAIInsights(updatedSessions)
+        performanceAnalytics: generatePerformanceAnalytics(updatedSessions)
       };
 
     case ACTIONS.DELETE_SESSION:
@@ -215,7 +382,7 @@ function studyReducer(state, action) {
       return {
         ...state,
         sessions: filteredSessions,
-        aiInsights: generateAIInsights(filteredSessions)
+        performanceAnalytics: generatePerformanceAnalytics(filteredSessions)
       };
 
     case ACTIONS.START_SESSION:
@@ -251,7 +418,7 @@ function studyReducer(state, action) {
         currentTimer: {
           ...initialState.currentTimer
         },
-        aiInsights: generateAIInsights(completedSessions)
+        performanceAnalytics: generatePerformanceAnalytics(completedSessions)
       };
 
     case ACTIONS.UPDATE_TIMER:
@@ -288,7 +455,7 @@ function studyReducer(state, action) {
       return {
         ...state,
         ...action.payload,
-        aiInsights: generateAIInsights(action.payload.sessions || state.sessions)
+        performanceAnalytics: generatePerformanceAnalytics(action.payload.sessions || state.sessions)
       };
 
     default:
@@ -329,11 +496,11 @@ export function StudyProvider({ children }) {
     const dataToSave = {
       sessions: state.sessions,
       focusRecords: state.focusRecords,
-      aiInsights: state.aiInsights,
+      performanceAnalytics: state.performanceAnalytics,
       settings: state.settings
     };
     localStorage.setItem('studyBuddyData', JSON.stringify(dataToSave));
-  }, [state.sessions, state.focusRecords, state.aiInsights, state.settings]);
+  }, [state.sessions, state.focusRecords, state.performanceAnalytics, state.settings]);
 
   const value = {
     ...state,
