@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useStudy } from '../context/StudyContext';
 import FocusTimer from './FocusTimer';
 import SessionPlanner from './SessionPlanner';
+import SessionPlannerMonth from './SessionPlannerMonth';
 import Analytics from './Analytics';
 import { Play, Calendar, BarChart3, Brain, Settings } from 'lucide-react';
 
@@ -55,7 +56,7 @@ function MainApp() {
       {/* Main Content */}
       <main className="main-content">
         {activeView === 'timer' && <FocusTimer />}
-        {activeView === 'planner' && <SessionPlanner />}
+        {activeView === 'planner' && <SessionPlannerMonth />}
         {activeView === 'analytics' && <Analytics />}
       </main>
 
